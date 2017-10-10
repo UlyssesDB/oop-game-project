@@ -1,5 +1,3 @@
-// junk line to test git
-
 // This sectin contains some game constants. It is not super interesting
 var GAME_WIDTH = 375;
 var GAME_HEIGHT = 500;

@@ -3,11 +3,11 @@ var GAME_WIDTH = 375;
 var GAME_HEIGHT = 500;
 
 var ENEMY_WIDTH = 75;
-var ENEMY_HEIGHT = 156;
+var ENEMY_HEIGHT = 94;
 var MAX_ENEMIES = 3;
 
 var PLAYER_WIDTH = 75;
-var PLAYER_HEIGHT = 54;
+var PLAYER_HEIGHT = 84;
 
 // These two constants keep us from using "magic numbers" in our code
 var LEFT_ARROW_CODE = 37;

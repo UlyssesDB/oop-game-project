@@ -30,8 +30,14 @@ var images = {};
 
 
 // This section is where you will be doing most of your coding
-class Enemy {
+class Entity {
+    render(ctx) {
+        ctx.drawImage(this.sprite, this.x, this.y);
+    }
+}
+class Enemy extends Entity {
     constructor(xPos) {
+        super("enemy");
         this.x = xPos;
         this.y = -ENEMY_HEIGHT;
         this.sprite = images['enemy.png'];
@@ -43,14 +49,11 @@ class Enemy {
     update(timeDiff) {
         this.y = this.y + timeDiff * this.speed;
     }
-
-    render(ctx) {
-        ctx.drawImage(this.sprite, this.x, this.y);
-    }
 }
 
-class Player {
+class Player extends Entity {
     constructor() {
+        super("player");
         this.x = 2 * PLAYER_WIDTH;
         this.y = GAME_HEIGHT - PLAYER_HEIGHT - 10;
         this.sprite = images['player.png'];
@@ -64,10 +67,6 @@ class Player {
         else if (direction === MOVE_RIGHT && this.x < GAME_WIDTH - PLAYER_WIDTH) {
             this.x = this.x + PLAYER_WIDTH;
         }
-    }
-
-    render(ctx) {
-        ctx.drawImage(this.sprite, this.x, this.y);
     }
 }
 
@@ -178,6 +177,7 @@ class Engine {
             }
         });
         this.setupEnemies();
+        //this.isPlayerDead();                                          // <<<<<< insert
 
         // Check if player is dead
         if (this.isPlayerDead()) {
@@ -200,7 +200,15 @@ class Engine {
 
     isPlayerDead() {
         // TODO: fix this function!
-        return false;
+        //return false;
+        var checkDeath = (enemy) => {
+            //if (enemy.xPos == player.xPos) {
+            console.log(enemy, this.player);
+            if (enemy.x === this.player.x && (enemy.y + ENEMY_HEIGHT) >= this.player.y) {
+                return true;
+            } else { return false; }
+        }
+        return this.enemies.some(checkDeath);
     }
 }
 

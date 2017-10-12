@@ -193,7 +193,6 @@ class Engine {
             }
         });
         this.setupEnemies();
-        //this.isPlayerDead();                                          // <<<<<< insert
 
         // Check if player is dead
         if (this.isPlayerDead()) {
@@ -220,9 +219,13 @@ class Engine {
         var checkDeath = (enemy) => {
             //if (enemy.xPos == player.xPos) {
             console.log(enemy, this.player);
-            if (enemy.x === this.player.x && (enemy.y + ENEMY_HEIGHT) >= this.player.y) {
+            if (enemy.x === this.player.x && enemy.y >= this.player.y) {
+                return false;
+            }
+            else if (enemy.x === this.player.x && (enemy.y + ENEMY_HEIGHT) >= this.player.y) {
                 return true;
-            } else { return false; }
+            }
+            else { return false; }
         }
         return this.enemies.some(checkDeath);
     }

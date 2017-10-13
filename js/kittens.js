@@ -23,7 +23,7 @@ var MOVE_DOWN = 'down';
 
 // Preload game images
 var images = {};
-['enemy.png', 'stars.png', 'player.png'].forEach(imgName => {
+['enemy.png', 'stars.png', 'player.png', 'explode.png'].forEach(imgName => {
     var img = document.createElement('img');
     img.src = 'images/' + imgName;
     images[imgName] = img;
@@ -37,6 +37,9 @@ var images = {};
 class Entity {
     render(ctx) {
         ctx.drawImage(this.sprite, this.x, this.y);
+    }
+    render2(ctx) {
+        ctx.drawImage(this.sprite2, this.x - 37.5, this.y - 42);
     }
 }
 class Enemy extends Entity {
@@ -61,6 +64,7 @@ class Player extends Entity {
         this.x = 2 * PLAYER_WIDTH;
         this.y = GAME_HEIGHT - PLAYER_HEIGHT - 10;
         this.sprite = images['player.png'];
+        this.sprite2 = images['explode.png'];
     }
 
     // This method is called by the game engine when left/right arrows are pressed
@@ -200,6 +204,7 @@ class Engine {
             this.ctx.font = 'bold 30px Impact';
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillText(this.score + ' GAME OVER', 5, 30);
+            this.player.render2(this.ctx);                                               //  <<<<<<<<<<<<<<<<<<
         }
         else {
             // If player is not dead, then draw the score
@@ -218,7 +223,6 @@ class Engine {
         //return false;
         var checkDeath = (enemy) => {
             //if (enemy.xPos == player.xPos) {
-            console.log(enemy, this.player);
             if (enemy.x === this.player.x && enemy.y >= this.player.y) {
                 return false;
             }

@@ -14,12 +14,14 @@ var LEFT_ARROW_CODE = 37;
 var RIGHT_ARROW_CODE = 39;
 var UP_ARROW_CODE = 38;
 var DOWN_ARROW_CODE = 40;
+var SPACE_BAR = 32;
 
 // These two constants allow us to DRY
 var MOVE_LEFT = 'left';
 var MOVE_RIGHT = 'right';
 var MOVE_UP = 'up';
 var MOVE_DOWN = 'down';
+var RESTART = 'spacebar';
 
 // Preload game images
 var images = {};
@@ -159,6 +161,14 @@ class Engine {
             else if (e.keyCode === DOWN_ARROW_CODE) {
                 this.player.move(MOVE_DOWN);
             }
+            /*
+            else if (e.keyCode === SPACE_BAR) {
+                start();
+            }
+            else if (e.keycode === SPACE_BAR){
+                window.reload();
+            }
+            */
         });
 
         this.gameLoop();
